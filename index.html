@@ -663,7 +663,10 @@
 <div class="bg-surface-container-lowest p-8 md:p-12 rounded-[16px] shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-outline-variant/30">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-2 text-center">Request Information</h2>
 <p class="font-body-md text-body-md text-on-surface-variant mb-8 text-center">Interested in our products or services? Get in touch with our team to discuss your requirements.</p>
-<form id="inquiry-form" class="space-y-6" novalidate>
+<form id="inquiry-form" class="space-y-6" action="https://formsubmit.co/imzagiintl@gmail.com" method="POST">
+<input type="hidden" id="inquiry-subject" name="_subject" value="New wholesale inquiry"/>
+<input type="hidden" name="_captcha" value="false"/>
+<input type="hidden" name="_template" value="table"/>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
 <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Business Name</label>
@@ -869,7 +872,6 @@
                         const catalogGrid = document.getElementById('catalog-grid');
                         const catalogCount = document.getElementById('catalog-count');
                         const ownerWhatsApp = '923348165991';
-                        const ownerEmail = 'imzagiintl@gmail.com';
                         let activeCategory = 'caps';
 
                         function openWhatsAppInquiry(categoryName, itemName) {
@@ -942,27 +944,12 @@
                         });
 
                         const inquiryForm = document.getElementById('inquiry-form');
-                        const formStatus = document.getElementById('form-status');
-                        inquiryForm.addEventListener('submit', event => {
-                                event.preventDefault();
-                                if (!inquiryForm.checkValidity()) {
-                                        inquiryForm.reportValidity();
-                                        return;
-                                }
-                                const formData = new FormData(inquiryForm);
-                                const details = [
-                                        `Business Name: ${formData.get('businessName')}`,
-                                        `Contact Person: ${formData.get('contactName')}`,
-                                        `Email Address: ${formData.get('email')}`,
-                                        `Phone Number: ${formData.get('phone')}`,
-                                        `Products Interested In: ${formData.get('productsInterested')}`,
-                                        `Order Quantity: ${formData.get('orderQuantity') || 'Not specified'}`,
-                                        `Message: ${formData.get('message') || 'No additional message'}`
-                                ].join('\n');
-                                const subject = `Wholesale inquiry from ${formData.get('businessName')}`;
-                                window.location.href = `mailto:${ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(details)}`;
-                                formStatus.textContent = 'Your email app is opening with the complete inquiry addressed to our team.';
-                                formStatus.className = 'text-center font-label-md text-label-md text-primary';
+                        const inquirySubject = document.getElementById('inquiry-subject');
+                        inquiryForm.addEventListener('submit', () => {
+                                const businessName = inquiryForm.elements.businessName.value.trim();
+                                const contactName = inquiryForm.elements.contactName.value.trim();
+                                const customerName = businessName || contactName || 'a customer';
+                                inquirySubject.value = `New wholesale inquiry from ${customerName}`;
                         });
 
                         // Scroll progress bar
