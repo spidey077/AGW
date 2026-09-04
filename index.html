@@ -868,7 +868,17 @@
                         const catalogTabs = document.getElementById('catalog-tabs');
                         const catalogGrid = document.getElementById('catalog-grid');
                         const catalogCount = document.getElementById('catalog-count');
+                        const ownerWhatsApp = '923348165991';
+                        const ownerEmail = 'imzagiintl@gmail.com';
                         let activeCategory = 'caps';
+
+                        function openWhatsAppInquiry(categoryName, itemName) {
+                                const normalizedCategory = categoryName.toLowerCase();
+                                const normalizedItem = itemName.toLowerCase();
+                                const productLabel = normalizedItem.startsWith(normalizedCategory) ? normalizedItem : `${normalizedCategory} ${normalizedItem}`;
+                                const message = `Hey, I want to order sample like ${productLabel} on your website.`;
+                                window.open(`https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+                        }
 
                         function renderCatalog(categoryId) {
                                 const category = catalogData.find(item => item.id === categoryId) || catalogData[0];
@@ -880,7 +890,7 @@
                                                 ${item.name}<span class="ml-2 opacity-60">${item.images.length}</span>
                                         </button>`).join('');
                                 catalogGrid.innerHTML = visibleImages.map((image, index) => {
-                                        const itemName = category.itemNames?.[index] || `${category.name} sample ${String(index + 1).padStart(2, '0')}`;
+                                        const itemName = category.itemNames?.[index] || `${category.name} sample number ${index + 1}`;
                                         return `
                                         <article class="catalog-card product-card bg-surface rounded-[16px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-200 border border-outline-variant/30" style="animation-delay: ${Math.min(index, 7) * 45}ms">
                                                 <button class="image-frame catalog-image w-full block bg-surface-container-high cursor-zoom-in" data-catalog-image="${image}" data-catalog-name="${itemName}" type="button" aria-label="Open ${itemName}">
@@ -904,14 +914,12 @@
                                 catalogCount.textContent = `${visibleImages.length} of ${category.images.length} styles shown`;
                                 catalogTabs.querySelectorAll('[data-category]').forEach(tab => tab.addEventListener('click', () => renderCatalog(tab.dataset.category)));
                                 catalogGrid.querySelectorAll('[data-brand]').forEach(button => button.addEventListener('click', () => {
-                                        productDialogTitle.textContent = button.dataset.brand;
-                                        productDialogCopy.textContent = `Tell us the quantity, sizes, colors, and branding needed for your ${button.dataset.brand.toLowerCase()} order.`;
-                                        productDialog.showModal();
+                                        const card = button.closest('.product-card');
+                                        const itemName = card.querySelector('h3')?.textContent || `${button.dataset.brand} sample`;
+                                        openWhatsAppInquiry(button.dataset.brand, itemName);
                                 }));
                                 catalogGrid.querySelectorAll('[data-catalog-image]').forEach(imageButton => imageButton.addEventListener('click', () => {
-                                        productDialogTitle.textContent = imageButton.dataset.catalogName;
-                                        productDialogCopy.innerHTML = `<img src="${imageButton.dataset.catalogImage}" alt="${imageButton.dataset.catalogName}" class="w-full rounded-lg mt-4"/>`;
-                                        productDialog.showModal();
+                                        openWhatsAppInquiry(category.name, imageButton.dataset.catalogName);
                                 }));
                                 catalogGrid.querySelectorAll('[data-inquiry-category]').forEach(button => button.addEventListener('click', () => {
                                         const inquirySelect = document.querySelector('select[name="productsInterested"]');
@@ -941,9 +949,20 @@
                                         inquiryForm.reportValidity();
                                         return;
                                 }
-                                formStatus.textContent = 'Thank you. Your inquiry has been received. Our team will contact you via WhatsApp or email shortly.';
+                                const formData = new FormData(inquiryForm);
+                                const details = [
+                                        `Business Name: ${formData.get('businessName')}`,
+                                        `Contact Person: ${formData.get('contactName')}`,
+                                        `Email Address: ${formData.get('email')}`,
+                                        `Phone Number: ${formData.get('phone')}`,
+                                        `Products Interested In: ${formData.get('productsInterested')}`,
+                                        `Order Quantity: ${formData.get('orderQuantity') || 'Not specified'}`,
+                                        `Message: ${formData.get('message') || 'No additional message'}`
+                                ].join('\n');
+                                const subject = `Wholesale inquiry from ${formData.get('businessName')}`;
+                                window.location.href = `mailto:${ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(details)}`;
+                                formStatus.textContent = 'Your email app is opening with the complete inquiry addressed to our team.';
                                 formStatus.className = 'text-center font-label-md text-label-md text-primary';
-                                inquiryForm.reset();
                         });
 
                         // Scroll progress bar
