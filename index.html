@@ -474,13 +474,52 @@
                         border-color: rgba(193, 163, 90, 0.65);
                 }
 
+                .hero-title {
+                        font-size: 2.5rem;
+                        line-height: 1.1;
+                }
+
         /* Mobile menu */
         #mobile-menu {
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 380ms var(--motion-spring);
+                opacity: 0;
+                transform: translateY(-12px);
+                transition: max-height 420ms var(--motion-spring), opacity 260ms ease, transform 420ms var(--motion-spring);
         }
-        #mobile-menu.open { max-height: 24rem; }
+        #mobile-menu.open {
+                max-height: 24rem;
+                opacity: 1;
+                transform: translateY(0);
+        }
+        #mobile-menu > div {
+                opacity: 0;
+                transform: translateY(-8px);
+                transition: opacity 260ms ease 80ms, transform 420ms var(--motion-spring) 80ms;
+        }
+        #mobile-menu.open > div {
+                opacity: 1;
+                transform: translateY(0);
+        }
+        #mobile-menu a,
+        #mobile-menu button {
+                transition: color 200ms ease, background-color 200ms ease, transform 220ms var(--motion-spring);
+        }
+        #mobile-menu a:hover,
+        #mobile-menu button:hover { transform: translateX(4px); }
+        #menu-toggle .material-symbols-outlined {
+                transition: transform 320ms var(--motion-spring), opacity 180ms ease;
+        }
+        #menu-toggle[aria-expanded="true"] .material-symbols-outlined {
+                transform: rotate(90deg) scale(1.08);
+        }
+
+        @media (min-width: 768px) {
+                .hero-title {
+                        font-size: 3rem;
+                        line-height: 1.1667;
+                }
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-primary-fixed selection:text-primary">
@@ -531,7 +570,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 <!-- Left: Text Content -->
 <div class="fade-in-up reveal-stagger space-y-6">
-<h1 class="font-display-lg text-display-lg text-primary tracking-tight leading-tight">Your Manufacturing Partner in Sialkot</h1>
+<h1 class="hero-title font-display-lg text-primary tracking-tight">Your Manufacturing Partner in Sialkot</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant">Manufacturing and exporting premium apparel and sportswear — WWE-style belts, jackets, hoodies, tracksuits, and custom branding — from Sialkot, Pakistan to buyers worldwide.</p>
 <div class="flex flex-col sm:flex-row gap-4 pt-4">
 <button class="magnetic-button bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-lg hover:bg-primary/90 transition-colors shadow-[0_4px_20px_rgba(183,28,28,0.2)] hover:-translate-y-0.5 transform duration-200 text-lg" data-scroll-target="inquiry">
