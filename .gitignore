@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+styles.css
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+
+# Local/generated assets
+Caps/
+Jackets & Hoodies/
+Shorts/
+WWE Belts/
+Other Items/
+Golves/
+
+# Keep source logo and required site files tracked
+!Logo.png
+!index.html
+!seo.md
+!DESIGN.md
+!sitemap.xml
+!robots.txt

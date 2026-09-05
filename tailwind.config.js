@@ -1,0 +1,95 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./index.html'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'primary-fixed': '#FFCDD2',
+        'surface-container-high': '#e5e8ee',
+        surface: '#f7f9ff',
+        secondary: '#4c6452',
+        'surface-container-lowest': '#ffffff',
+        'tertiary-fixed-dim': '#e3c377',
+        'tertiary-fixed': '#ffdf96',
+        'secondary-container': '#cce6d0',
+        'surface-container-low': '#f1f4f9',
+        error: '#ba1a1a',
+        'primary-container': '#C62828',
+        'on-primary-fixed-variant': '#6D4C41',
+        'secondary-fixed-dim': '#b3cdb7',
+        tertiary: '#312400',
+        'surface-tint': '#B71C1C',
+        'surface-bright': '#f7f9ff',
+        'on-tertiary-container': '#c1a35a',
+        'outline-variant': '#c1c8c2',
+        'error-container': '#ffdad6',
+        outline: '#717973',
+        'on-error-container': '#93000a',
+        'on-surface-variant': '#414844',
+        'inverse-surface': '#2d3135',
+        'surface-container-highest': '#e0e3e8',
+        'inverse-on-surface': '#eef1f6',
+        'primary-fixed-dim': '#EF9A9A',
+        'tertiary-container': '#4c3900',
+        'on-primary-container': '#FFCDD2',
+        'surface-variant': '#e0e3e8',
+        'on-primary-fixed': '#5D1F1A',
+        'on-secondary': '#ffffff',
+        'on-secondary-fixed': '#092012',
+        'on-primary': '#ffffff',
+        'on-surface': '#181c20',
+        'on-tertiary-fixed': '#251a00',
+        'inverse-primary': '#EF9A9A',
+        'secondary-fixed': '#cee9d3',
+        'surface-container': '#ebeef3',
+        'on-secondary-fixed-variant': '#354c3b',
+        'on-tertiary': '#ffffff',
+        background: '#f7f9ff',
+        'on-background': '#181c20',
+        'on-tertiary-fixed-variant': '#594401',
+        primary: '#B71C1C',
+        'primary-dark': '#7f1313',
+        'on-error': '#ffffff',
+        'surface-dim': '#d7dadf',
+        'on-secondary-container': '#506856',
+        gold: '#C1A35A'
+      },
+      borderRadius: {
+        DEFAULT: '0.25rem',
+        lg: '0.5rem',
+        xl: '0.75rem',
+        full: '9999px'
+      },
+      spacing: {
+        'container-max': '1280px',
+        'section-gap': '80px',
+        'margin-desktop': '48px',
+        'margin-mobile': '16px',
+        gutter: '24px',
+        base: '8px'
+      },
+      fontFamily: {
+        'headline-lg-mobile': ['Montserrat'],
+        'label-md': ['Inter'],
+        'headline-md': ['Montserrat'],
+        'body-lg': ['Inter'],
+        'headline-lg': ['Montserrat'],
+        'display-lg': ['Montserrat'],
+        'label-sm': ['Inter'],
+        'body-md': ['Inter']
+      },
+      fontSize: {
+        'headline-lg-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.02em', fontWeight: '600' }],
+        'headline-md': ['24px', { lineHeight: '32px', letterSpacing: '0em', fontWeight: '600' }],
+        'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+        'headline-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.04em', fontWeight: '500' }],
+        'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }]
+      }
+    }
+  },
+  plugins: []
+};
